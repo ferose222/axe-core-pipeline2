@@ -55,11 +55,20 @@ public class PlaywrightJavaTest {
   }
 
   @After
-  public void teardown() throws IOException {
+  public void teardown() throws IOException, URISyntaxException {
     URL currentSource = AxeBuilder.class.getResource("/axe.min.js");
 
-    Files.write(Paths.get(currentSource.getPath()), oldSource.getBytes());
+    if (currentSource != null) {
+      // Convert URL to URI to handle spaces and special characters in the path correctly
+      Path path = Paths.get(currentSource.toURI());
 
+      // Write to the file safely
+      Files.write(path, oldSource.getBytes());
+    } else {
+      System.err.println("Resource not found: /axe.min.js");
+    }
+
+    // Close the browser
     browser.close();
   }
 
@@ -95,12 +104,13 @@ public class PlaywrightJavaTest {
 
   private void overwriteAxeSourceWithString(String source) throws IOException, URISyntaxException {
     URL axeUrl = AxeBuilder.class.getResource("/axe.min.js");
-    Files.write(Paths.get(axeUrl.toURI().getPath()), source.getBytes(), StandardOpenOption.WRITE);
+    assert axeUrl != null;
+    Files.write(Paths.get(axeUrl.toURI()), source.getBytes(), StandardOpenOption.WRITE);
   }
 
   private void appendAxeSourceWithString(String source) throws IOException, URISyntaxException {
     URL axeUrl = AxeBuilder.class.getResource("/axe.min.js");
-    Files.write(Paths.get(axeUrl.toURI().getPath()), source.getBytes(), StandardOpenOption.APPEND);
+    Files.write(Paths.get(axeUrl.toURI()), source.getBytes(), StandardOpenOption.APPEND);
   }
 
   private String downloadFromURL(String url) throws Exception {

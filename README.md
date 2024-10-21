@@ -11,11 +11,42 @@ The packages are listed below:
 
 ## Development
 
+In selenium folder inside pom.xml, the plugin for maven should match the system Java version
+```pom.xml
+<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>This should be same as system java version</source>
+                    <target>This should be same as system java version</target>
+                </configuration>
+            </plugin>
+
+```
+
+
 Install root dependencies:
 
 ```console
 npm install
 ```
+Go to individual folders of Selenium and Playwright, and run 
+```console
+npm start
+```
+*Optional
+Go to individual folders of Selenium and Playwright, and run
+```console
+npm start
+mvn clean install
+```
+
+Then goto root folder and run
+```console
+mvn clean install
+```
+
 
 Please refer to respective README for installation, usage, and configuration notes.
 

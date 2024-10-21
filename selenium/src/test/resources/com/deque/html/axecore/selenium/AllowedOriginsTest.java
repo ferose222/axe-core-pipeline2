@@ -1,7 +1,5 @@
 package com.deque.html.axecore.selenium;
 
-import static org.junit.Assert.*;
-
 import com.deque.html.axecore.playwright.AxeBuilder;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
@@ -21,7 +19,6 @@ import java.util.Objects;
 import java.util.Scanner;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AllowedOriginsTest {
@@ -35,7 +32,7 @@ public class AllowedOriginsTest {
     return "http://localhost:1337";
   }
 
-  @BeforeClass
+  @org.testng.annotations.BeforeClass
   public static void reloadSource() throws IOException {
     URL oldSourceUrl = AxeBuilder.class.getResource("/axe.min.js");
     axeSource = URLReader(oldSourceUrl, StandardCharsets.UTF_8);
@@ -93,7 +90,7 @@ public class AllowedOriginsTest {
 
     ArrayList<String> origins = new ArrayList<>();
     origins.add(addr());
-    assertTrue(Objects.deepEquals(allowedOrigins, origins));
+    Assert.assertTrue(Objects.deepEquals(allowedOrigins, origins));
   }
 
   @Test
@@ -105,7 +102,7 @@ public class AllowedOriginsTest {
 
     ArrayList<String> origins = new ArrayList<>();
     origins.add(addr());
-    assertTrue(Objects.deepEquals(allowedOrigins, origins));
+    Assert.assertTrue(Objects.deepEquals(allowedOrigins, origins));
   }
 
   @Test
@@ -118,7 +115,7 @@ public class AllowedOriginsTest {
 
     ArrayList<String> origins = new ArrayList<>();
     origins.add(addr());
-    assertTrue(Objects.deepEquals(allowedOrigins, origins));
+    Assert.assertTrue(Objects.deepEquals(allowedOrigins, origins));
   }
 
   @Test
@@ -131,6 +128,6 @@ public class AllowedOriginsTest {
 
     ArrayList<String> origins = new ArrayList<>();
     origins.add("*");
-    assertTrue(Objects.deepEquals(allowedOrigins, origins));
+    Assert.assertTrue(Objects.deepEquals(allowedOrigins, origins));
   }
 }
