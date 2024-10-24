@@ -12,8 +12,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 git credentialsId: 'git',
-                    url: 'https://github.com/ferosetechie/axe-core.git',
-                    branch: 'main'
+                    url: 'https://github.com/ferose222/axe-core-pipeline2',
+                    branch: 'develop'
             }
         }
         stage('Install Java') {
@@ -23,8 +23,8 @@ pipeline {
                     sh '''
                         JAVA_VERSION=$(grep -oP '<source>\\K[0-9.]+' selenium/pom.xml | head -1)
                         if [ -n "$JAVA_VERSION" ]; then
-                            sudo apt-get update
-                            sudo apt-get install -y openjdk-${JAVA_VERSION}-jdk
+                            apt-get update
+                            apt-get install -y openjdk-${JAVA_VERSION}-jdk
                             export JAVA_HOME=$(update-java-alternatives -l | grep "java-${JAVA_VERSION}-openjdk" | awk '{print $3}')
                             export PATH=$JAVA_HOME/bin:$PATH
                         fi
