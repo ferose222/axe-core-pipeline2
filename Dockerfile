@@ -11,6 +11,8 @@ RUN npm install && \
 
 # Install http-server globally (if needed)
 RUN npm install -g http-server
+# Install Selenium-webdriver
+RUN npm install selenium-webdriver
 
 # Add the Google Chrome repository and install Chrome + ChromeDriver
 RUN apt-get update && \
