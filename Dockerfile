@@ -11,8 +11,6 @@ RUN npm install && \
 
 # Install http-server globally (if needed)
 RUN npm install -g http-server
-# Install Selenium-webdriver
-RUN npm install selenium-webdriver
 
 # Add the Google Chrome repository and install Chrome + ChromeDriver
 RUN apt-get update && \
@@ -28,6 +26,10 @@ RUN mkdir -p /dev/shm && chmod 1777 /dev/shm
 
 # Copy the rest of the application
 COPY . .
+
+# Set environment variables for Chrome
+ENV CHROME_BIN=/usr/bin/google-chrome
+ENV CHROME_PATH=/usr/bin/google-chrome
 
 # Expose port 3000 (if needed)
 EXPOSE 3000

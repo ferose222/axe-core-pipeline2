@@ -8,7 +8,13 @@
     "docs:copy": "copyfiles -u 1 'docs/assets/*' 'docs/nav.json' 'dist-docs'",
     "predocs": "npm run docs:clean && npm run docs:copy",
     "docs": "./md-to-html.sh docs dist-docs",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "node run-accessibility-tests.js"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.10.0",
+    "axe-core": "^4.7.0",
+    "chromedriver": "^114.0.0"
   },
   "devDependencies": {
     "conventional-changelog-cli": "^5.0.0",
